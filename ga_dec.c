@@ -9,8 +9,8 @@ struct gene {
 };
 
 struct pop {
-	struct gene* genes;
 	size_t size;
+	struct gene genes[0];
 };
 
 struct pop* init_population(int size, int seed, double max, double min) {
@@ -21,7 +21,8 @@ struct pop* init_population(int size, int seed, double max, double min) {
 		seed = time(NULL);
 	}
 	srand(seed);
-	struct pop* p = malloc(sizeof(struct pop)+sizeof(struct gene)*size);
+	struct pop* p = malloc(sizeof(struct pop)+sizeof(struct gene*)*size);
+	p->size = size;
 	for (int i = 0; i < size; ++i) {
 		p->genes[i].chrom_a = min + 
 			(float)rand()/RAND_MAX * (max - min);
@@ -32,7 +33,10 @@ struct pop* init_population(int size, int seed, double max, double min) {
 }
 
 void printpop(struct pop* population) {
-	
+	for (int i = 0; i < population->size; ++i) {
+		struct gene g = population->genes[i];
+		printf("a: %f, b: %f\n",g.chrom_a,g.chrom_b);
+	}	
 }
 
 void freepop(struct pop* population) {

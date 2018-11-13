@@ -12,7 +12,9 @@ int main(int argc, char** argv) {
 		double x[] = {20, 13};
 		result = foxholes(x);
 	}
-
+	struct pop* p = init_population(10,-1,40,-41);
+	printpop(p);
+	freepop(p);
 	printf("%lf\n", result);
 	return 0;
 }

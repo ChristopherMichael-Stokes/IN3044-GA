@@ -1,5 +1,5 @@
 CC=gcc
-CFLAGS=-I. -lm
+CFLAGS=-I. -lm -std=c99
 DEPS = foxhole.h ga.h
 OBJ = main.o foxhole.o ga_dec.o
 
